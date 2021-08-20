@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    align-items: center;
+}
+
+p {
+    margin: 1em auto;
+    color: #161616;
+    font-size: xx-large;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+    font-weight: bold;
+}
+
+#canvas {
+    margin: 1em;
+    width: 640px;
+    height: 640px;
+}
