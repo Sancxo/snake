@@ -18,6 +18,16 @@ p {
 
 #canvas {
     margin: 1em;
-    width: 640px;
-    height: 640px;
+    width: 100vw;
+    height: 100vw;
+    max-width: 640px;
+    max-height: 640px;
+}
+@media (max-height: 640px) {
+    p { margin: auto; }
+    #canvas {
+        margin: auto;
+        max-height: 320px;
+        max-width: 320px;
+    }
 }
