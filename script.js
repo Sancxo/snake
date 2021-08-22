@@ -4,7 +4,11 @@ const ctx = gameCanvas.getContext("2d");
 
 const options = {
     score: 0,
-    speed: 200 // the closer to zero, the speeder the game is
+    speed: 200, // the closer to zero, the speeder the game is
+    startTouchX: 0,
+    startTouchY: 0,
+    endTouchX: 0,
+    endTouchY: 0
 }
 const canvas = {
     width: 320,
@@ -75,7 +79,16 @@ const advanceSnake = () => {
     };
 }
 
-const changeDirection = (e) => {
+const actualDirection = {
+    left: snake.speedX === -gameCanvas.width/33,
+    up: snake.speedY === -gameCanvas.height/33,
+    right: snake.speedX === gameCanvas.width/33,
+    down: snake.speedY === gameCanvas.height/33
+}
+
+const changeDirection = e => {
+    e.preventDefault();
+
     if(snake.changingDirection) return;
     snake.changingDirection = true;
 
@@ -88,17 +101,41 @@ const changeDirection = (e) => {
         down: [40, 83]
     }
 
-    const actualDirection = {
-        left: snake.speedX === -gameCanvas.width/33,
-        up: snake.speedY === -gameCanvas.height/33,
-        right: snake.speedX === gameCanvas.width/33,
-        down: snake.speedY === gameCanvas.height/33
-    }
-
     if( keys.left.includes(key) && !actualDirection.right ) { snake.speedX = -gameCanvas.width/33; snake.speedY = 0 }; // Left
     if( keys.up.includes(key) && !actualDirection.down ) { snake.speedX = 0; snake.speedY = -gameCanvas.height/33 }; // Up
     if( keys.right.includes(key) && !actualDirection.left ) { snake.speedX = gameCanvas.width/33; snake.speedY = 0 }; // Right
     if( keys.down.includes(key) && !actualDirection.up ) { snake.speedX = 0; snake.speedY = gameCanvas.height/33 }; // Down
+
+}
+
+const handleTouchStart = e => {
+    options.startTouchX = e.touches[0].clientX;
+    options.startTouchY = e.touches[0].clientY;
+};
+
+const handleTouchMove = e => {
+    options.endTouchX = e.touches[0].clientX;
+    options.endTouchY = e.touches[0].clientY;
+    handleGesure();
+}
+
+function handleGesure() {
+    const diff = {
+        touchX: Math.abs(options.endTouchX - options.startTouchX),
+        touchY: Math.abs(options.endTouchY - options.startTouchY)
+    }
+
+    const direction = {
+        left: options.startTouchX > options.endTouchX,
+        up: options.startTouchY > options.endTouchY,
+        right: options.startTouchX < options.endTouchX,
+        down: options.startTouchY < options.endTouchY
+    }
+
+    if (direction.left && !actualDirection.right && diff.touchX > diff.touchY ) { snake.speedX = -gameCanvas.width/33; snake.speedY = 0 }; // Left;
+    if (direction.up && !actualDirection.down && diff.touchX < diff.touchY ) { snake.speedX = 0; snake.speedY = -gameCanvas.height/33 }; // Up
+    if (direction.right && !actualDirection.left && diff.touchX > diff.touchY ) { snake.speedX = gameCanvas.width/33; snake.speedY = 0 }; // Right
+    if (direction.down && !actualDirection.up && diff.touchX < diff.touchY) { snake.speedX = 0; snake.speedY = gameCanvas.height/33 }; // Down
 
 }
 
@@ -148,3 +185,5 @@ createFood();
 snake.speedX = gameCanvas.width/33;
 main();
 document.addEventListener("keydown", changeDirection);
+document.addEventListener("touchstart", handleTouchStart);
+document.addEventListener("touchmove", handleTouchMove);
