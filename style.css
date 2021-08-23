@@ -7,7 +7,21 @@ body {
     margin: 0;
     align-items: center;
 }
-
+#game-over-screen {
+    position: absolute;
+    top: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#game-over-screen p {
+    color: red;
+}
+button {
+    width: 50%;
+}
 p {
     margin: 1em auto;
     color: #161616;

@@ -2,13 +2,17 @@
 const gameCanvas = document.getElementById("canvas");
 const ctx = gameCanvas.getContext("2d");
 
+const gameOverScreen = document.getElementById('game-over-screen');
+gameOverScreen.style.display = 'none';
+
 const options = {
     score: 0,
     speed: 200, // the closer to zero, the speeder the game is
     startTouchX: 0,
     startTouchY: 0,
     endTouchX: 0,
-    endTouchY: 0
+    endTouchY: 0,
+    isGameOver: false
 }
 const canvas = {
     width: 320,
@@ -172,13 +176,22 @@ const gameOver = () => {
 
     return Object.values(hitWall).includes(true) ?? false;
 }
+const onGameOver = () => {
+    options.isGameOver = false;
+    location.reload();
+}
+document.getElementById('reload-btn').onclick = onGameOver;
 
 // Launch game
 const main = () => {
     getScore();
     drawSnake();
 
-    if (gameOver()) return;
+    if (gameOver()) {
+        options.isGameOver = true;
+        gameOverScreen.style.display = 'flex';
+        return
+    };
 
     setTimeout(() => {
         snake.changingDirection = false;

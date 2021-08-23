@@ -11,13 +11,17 @@
     <script>
         if('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/snake/sw.js')
-            .then(() => {
-                console.log('Service Worker registered');
-            })
+            // .then(() => {
+            //     console.log('Service Worker registered');
+            // })
         }
     </script>
 </head>
 <body>
+    <div id="game-over-screen">
+        <p>Game Over !</p>
+        <button id="reload-btn">Rejouer</button>
+    </div>
     <p>Score: <span id="score"></span><br /></p>
     <canvas id="canvas"></canvas>
     <script type="text/javascript" src="./script.js"></script>
