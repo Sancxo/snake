@@ -1,6 +1,5 @@
 let cacheName = "snake-game-page";
 let filesToCache = [
-    '/',
     '/index.html',
     '/style.css',
     '/script.js'
