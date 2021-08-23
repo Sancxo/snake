@@ -5,6 +5,7 @@
     "scope": "/snake/",
     "display": "standalone",
     "description": "Classic Nokia's Snake game made in vanilla JavaScript for training purposes.",
+    "theme_color": "#FFF",
     "icons": [
         {
             "src": "icons/snake-icon-512.png",
