@@ -16,7 +16,8 @@ body {
     justify-content: center;
     text-align: center;
     background-color: black;
-    margin: 1em;
+    padding: 1em;
+    border-radius: 10px;
 }
 #game-over-screen p {
     color: red;
