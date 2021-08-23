@@ -15,9 +15,10 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+    background-color: black;
+    margin: 1em;
 }
 #game-over-screen p {
-    background-color: black;
     color: red;
 }
 button {
