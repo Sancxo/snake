@@ -98,7 +98,7 @@ const changeDirection = e => {
     if(snake.changingDirection) return;
     snake.changingDirection = true;
 
-    let key = e.keyCode;
+   let key = e.keyCode;
 
     const keys = {
         left: [37, 65, 81],
@@ -134,6 +134,9 @@ const handleTouchMove = e => {
 }
 
 function handleSwipe() {
+    if(snake.changingDirection) return;
+    snake.changingDirection = true;
+
     const diff = {
         touchX: Math.abs(options.endTouchX - options.startTouchX),
         touchY: Math.abs(options.endTouchY - options.startTouchY)
