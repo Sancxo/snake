@@ -1,8 +1,9 @@
 let cacheName = "snake-game-page";
 let filesToCache = [
-    '/index.html',
-    '/style.css',
-    '/script.js'
+    '/snake',
+    '/snake/index.html',
+    '/snake/style.css',
+    '/snake/script.js'
 ];
 
 self.addEventListener('install', e => {
