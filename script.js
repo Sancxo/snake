@@ -117,13 +117,17 @@ const changeDirection = e => {
 }
 
 const handleTouchStart = e => {
-    e.preventDefault();
+    if(!options.isGameOver) {
+        e.preventDefault();
+    };
     options.startTouchX = e.touches[0].clientX;
     options.startTouchY = e.touches[0].clientY;
 };
 
 const handleTouchMove = e => {
-    e.preventDefault();
+    if(!options.isGameOver) {
+        e.preventDefault();
+    };
     options.endTouchX = e.touches[0].clientX;
     options.endTouchY = e.touches[0].clientY;
     handleSwipe();
