@@ -79,11 +79,15 @@ const advanceSnake = () => {
     };
 }
 
-const actualDirection = {
-    left: snake.speedX === -gameCanvas.width/33,
-    up: snake.speedY === -gameCanvas.height/33,
-    right: snake.speedX === gameCanvas.width/33,
-    down: snake.speedY === gameCanvas.height/33
+const getActualDirection = () => {
+    const actualDirection = {
+        left: snake.speedX === -gameCanvas.width/33,
+        up: snake.speedY === -gameCanvas.height/33,
+        right: snake.speedX === gameCanvas.width/33,
+        down: snake.speedY === gameCanvas.height/33
+    }
+
+    return actualDirection;
 }
 
 const changeDirection = e => {
@@ -101,6 +105,8 @@ const changeDirection = e => {
         down: [40, 83]
     }
 
+    const actualDirection = getActualDirection();
+
     if( keys.left.includes(key) && !actualDirection.right ) { snake.speedX = -gameCanvas.width/33; snake.speedY = 0 }; // Left
     if( keys.up.includes(key) && !actualDirection.down ) { snake.speedX = 0; snake.speedY = -gameCanvas.height/33 }; // Up
     if( keys.right.includes(key) && !actualDirection.left ) { snake.speedX = gameCanvas.width/33; snake.speedY = 0 }; // Right
@@ -109,21 +115,25 @@ const changeDirection = e => {
 }
 
 const handleTouchStart = e => {
+    e.preventDefault();
     options.startTouchX = e.touches[0].clientX;
     options.startTouchY = e.touches[0].clientY;
 };
 
 const handleTouchMove = e => {
+    e.preventDefault();
     options.endTouchX = e.touches[0].clientX;
     options.endTouchY = e.touches[0].clientY;
-    handleGesure();
+    handleSwipe();
 }
 
-function handleGesure() {
+function handleSwipe() {
     const diff = {
         touchX: Math.abs(options.endTouchX - options.startTouchX),
         touchY: Math.abs(options.endTouchY - options.startTouchY)
     }
+
+    const actualDirection = getActualDirection();
 
     const direction = {
         left: options.startTouchX > options.endTouchX,
@@ -185,5 +195,5 @@ createFood();
 snake.speedX = gameCanvas.width/33;
 main();
 document.addEventListener("keydown", changeDirection);
-document.addEventListener("touchstart", handleTouchStart);
-document.addEventListener("touchmove", handleTouchMove);
+document.addEventListener("touchstart", handleTouchStart, {passive: false});
+document.addEventListener("touchmove", handleTouchMove, {passive: false});
