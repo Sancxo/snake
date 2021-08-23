@@ -17,6 +17,7 @@ body {
     text-align: center;
 }
 #game-over-screen p {
+    background-color: black;
     color: red;
 }
 button {
