@@ -91,8 +91,6 @@ const getActualDirection = () => {
 }
 
 const changeDirection = e => {
-    e.preventDefault();
-
     if(snake.changingDirection) return;
     snake.changingDirection = true;
 
