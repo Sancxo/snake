@@ -1,8 +1,8 @@
 {
     "name": "Sancxo's Snake Game",
     "short_name": "Snake Game",
-    "start_url": "/snake",
-    "scope": "/snake",
+    "start_url": "/snake/",
+    "scope": "/snake/",
     "display": "standalone",
     "description": "Classic Nokia's Snake game made in vanilla JavaScript for training purposes.",
     "icons": [
